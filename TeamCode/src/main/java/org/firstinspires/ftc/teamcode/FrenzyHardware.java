@@ -39,6 +39,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 
         public Servo claw;
 
+        public Servo outake;
+
         public BNO055IMU imu;
 
         public double motorSpeed = 0;

@@ -59,11 +59,11 @@ import com.qualcomm.robotcore.hardware.Servo;
                 }
 
                 if(gamepad2.dpad_left){
-                    robot.quack.setPower(-.9);
+                    robot.quack.setPower(-1);
                     robot.quack.setTargetPosition(-100);
                 }
                 if(gamepad2.dpad_right){
-                    robot.quack.setPower(.9);
+                    robot.quack.setPower(1);
                     robot.quack.setTargetPosition(100);
                 }
 
@@ -136,9 +136,26 @@ import com.qualcomm.robotcore.hardware.Servo;
                     bababooey = false;
                 }
 
-                telemetry.update();
+                if(gamepad2.right_trigger < .1){
+                    robot.outake.setPosition(.457);
+                }
+                if(gamepad2.right_trigger > .1){
+                    robot.outake.setPosition(.652);
+                }
 
-// wow wow
+                if(gamepad2.a){
+                    robot.claw.setPosition(.5);
+                }
+
+                if(gamepad2.b){
+                    robot.claw.setPosition(.2);
+                }
+
+                if(gamepad2.y){
+                    robot.claw.setPosition(1);
+                }
+
+                telemetry.update();
 
             }
         }
