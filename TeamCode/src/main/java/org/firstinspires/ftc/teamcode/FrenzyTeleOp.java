@@ -24,12 +24,12 @@ import com.qualcomm.robotcore.hardware.Servo;
         public void runOpMode() {
             boolean intakeSwitch = false;
 
+            // init sequence
             robot.init(hardwareMap);
 
-
-            /*robot.armLift.setPower(0.4);
+            robot.armLift.setPower(0.4);
             robot.armLift.setTargetPosition(robot.armLift.getCurrentPosition());
-            robot.armLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);*/
+            robot.armLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
             telemetry.addData("Status", "Initialized");
             telemetry.update();
@@ -106,8 +106,6 @@ import com.qualcomm.robotcore.hardware.Servo;
                 if (robot.quack != null)  {
                     robot.quack.setPower(robot.quackPower);
                 }
-
-
                 telemetry.update();
 
 
@@ -118,10 +116,14 @@ import com.qualcomm.robotcore.hardware.Servo;
                 telemetry.addData("position", robot.armLift.getCurrentPosition());
 
                 if (gamepad2.left_stick_y > 0.5) {
+                    telemetry.addData("ticks", robot.armLift.getCurrentPosition());
                     robot.armLift.setPower(0.3);
+                    telemetry.update();
                    // robot.armLift.setTargetPosition(-31);
                 }else if (gamepad2.left_stick_y < -0.5) {
                     robot.armLift.setPower(-0.3);
+                    telemetry.addData("ticks", robot.armLift.getCurrentPosition());
+                    telemetry.update();
                    // robot.armLift.setTargetPosition(-1658);
                 }else{
                     robot.armLift.setPower(0);
@@ -144,15 +146,19 @@ import com.qualcomm.robotcore.hardware.Servo;
                 }
 
                 if(gamepad2.a){
-                    robot.claw.setPosition(.5);
+                    robot.claw.setPosition(10);
                 }
 
                 if(gamepad2.b){
-                    robot.claw.setPosition(.2);
+                    robot.claw.setPosition(12);
                 }
 
                 if(gamepad2.y){
-                    robot.claw.setPosition(1);
+                    robot.claw.setPosition(18);
+                }
+
+                if(gamepad2.left_bumper){
+                    robot.tubeBois.setPosition(100);
                 }
 
                 telemetry.update();

@@ -39,6 +39,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 
         public Servo claw;
 
+        public Servo tubeBois;
+
         public Servo outake;
 
         public BNO055IMU imu;
@@ -124,6 +126,19 @@ import com.qualcomm.robotcore.hardware.Servo;
                 claw = hardwareMap.servo.get("claw");
             } catch (Exception a){
                 claw = null;
+            }
+
+
+            try {
+                outake = hardwareMap.servo.get("outake");
+            } catch (Exception a){
+                outake = null;
+            }
+
+            try {
+                tubeBois = hardwareMap.servo.get("tubeBois");
+            } catch (Exception a){
+                tubeBois = null;
             }
 
 
