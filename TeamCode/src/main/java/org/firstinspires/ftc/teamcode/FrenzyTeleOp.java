@@ -1,13 +1,9 @@
-package org.firstinspires.ftc.teamcode;
+package main.java.org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.hardware.rev.RevTouchSensor;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
-import com.qualcomm.robotcore.hardware.Servo;
 
 
     @TeleOp(name="FrenzyTeleOp", group="Linear Opmode")
@@ -27,9 +23,10 @@ import com.qualcomm.robotcore.hardware.Servo;
             // init sequence
             robot.init(hardwareMap);
 
-            robot.armLift.setPower(0.4);
-            robot.armLift.setTargetPosition(robot.armLift.getCurrentPosition());
-            robot.armLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+            robot.armLift.setPower(0);
+            //robot.armLift.setTargetPosition(robot.armLift.getCurrentPosition());
+            //robot.armLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
             telemetry.addData("Status", "Initialized");
             telemetry.update();
@@ -114,20 +111,24 @@ import com.qualcomm.robotcore.hardware.Servo;
 
                 // GamePad 2
                 telemetry.addData("position", robot.armLift.getCurrentPosition());
-
+/*
                 if (gamepad2.left_stick_y > 0.5) {
                     telemetry.addData("ticks", robot.armLift.getCurrentPosition());
-                    robot.armLift.setPower(0.3);
+                    robot.armLift.setPower(1);
                     telemetry.update();
                    // robot.armLift.setTargetPosition(-31);
                 }else if (gamepad2.left_stick_y < -0.5) {
-                    robot.armLift.setPower(-0.3);
+                    robot.armLift.setPower(-1);
                     telemetry.addData("ticks", robot.armLift.getCurrentPosition());
                     telemetry.update();
                    // robot.armLift.setTargetPosition(-1658);
                 }else{
                     robot.armLift.setPower(0);
                 }
+*/
+
+
+                robot.armLift.setPower(gamepad2.left_stick_y);
 
                 if(gamepad2.x && !bababooey){
                     robot.claw.setPosition(0.5);
@@ -139,10 +140,11 @@ import com.qualcomm.robotcore.hardware.Servo;
                 }
 
                 if(gamepad2.right_trigger < .1){
-                    robot.outake.setPosition(.457);
+                    robot.outake.setPosition(0.184);
                 }
+
                 if(gamepad2.right_trigger > .1){
-                    robot.outake.setPosition(.652);
+                    robot.outake.setPosition(0.313);
                 }
 
                 if(gamepad2.a){
@@ -157,12 +159,18 @@ import com.qualcomm.robotcore.hardware.Servo;
                     robot.claw.setPosition(18);
                 }
 
-                if(gamepad2.left_bumper){
-                    robot.tubeBois.setPosition(100);
+                if (!gamepad2.left_bumper && !gamepad2.right_bumper){
+                    robot.tubeBois.setPosition(.5);  // stop tube spinner
+                }else{
+                    if (gamepad2.right_bumper){
+                        robot.tubeBois.setPosition(0);  // spin to outtake
+                    }
+                    if (gamepad2.left_bumper){
+                        robot.tubeBois.setPosition(1);   // spin to intake
+                    }
+
                 }
-
                 telemetry.update();
-
             }
         }
 

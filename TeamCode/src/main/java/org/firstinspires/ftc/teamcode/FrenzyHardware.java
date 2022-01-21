@@ -1,12 +1,9 @@
-package org.firstinspires.ftc.teamcode;
+package main.java.org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.util.Range;
 import com.qualcomm.robotcore.hardware.Servo;
 
     /**************************************************************************************************/
@@ -131,12 +128,14 @@ import com.qualcomm.robotcore.hardware.Servo;
 
             try {
                 outake = hardwareMap.servo.get("outake");
+                outake.setPosition(0.184);          // init servo position to back of intake box
             } catch (Exception a){
                 outake = null;
             }
 
             try {
                 tubeBois = hardwareMap.servo.get("tubeBois");
+                tubeBois.setPosition(.5);           // init continuous servo to stop
             } catch (Exception a){
                 tubeBois = null;
             }
